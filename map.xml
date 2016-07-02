@@ -2,13 +2,14 @@
 
 <!-- 更新履歴 -->
 <!--
-  2016/07/01 - 初版
+  2016/07/01 v1.0.0 - 初版
+  2016/0702 v1.0.1 - チュートリアルの修正
  -->
 <map proto="1.3.5">
   <!-- マップ名 -->
   <name>End CP 2</name>
   <!-- バージョン -->
-  <version>1.0.0</version>
+  <version>1.0.1</version>
   <!-- 目標 -->
   <objective>Capture the Control Point!!</objective>
 
@@ -79,7 +80,7 @@
     <spawn kit="blue" team="blue" yaw="-135">
       <block>-37,4,37</block>
     </spawn>
-    <default yaw="-90">
+    <default yaw="90">
       <block>0,62,0</block>
     </default>
   </spawns>
@@ -94,7 +95,7 @@
       <team>blue</team>
     </filter>
 
-    <filter id="allow_smooth_brick" parents="deny-blocks">
+    <filter id="allow_quartz_block" parents="deny-blocks">
       <allow>
         <block>quartz_block</block>
         <block>tnt</block>
@@ -114,8 +115,8 @@
     <cuboid id="south" max="-2,16,41" min="2,23,37"/>
     <rectangle id="void" max="-42,42" min="42,-42"/>
 
-    <negative name="void_negative">
-  		<region name="void"/>
+    <negative id="void_negative">
+  		<region id="void"/>
   	</negative>
 
     <union id="cp">
@@ -147,7 +148,7 @@
       <region id="blue_base"/>
     </apply>
 
-    <apply block="allow_smooth_brick" message="You can be the placement and destruction of quartz block and tnt!">
+    <apply block="allow_quartz_block" message="You can be the placement and destruction of quartz block and tnt!">
       <region id="everywhere"/>
     </apply>
 
@@ -217,6 +218,9 @@
 		<instantignite>on</instantignite>
 	</tnt>
 
+  <!-- スクリプト -->
+  <script src="map.js"/>
+
   <!-- 言語 -->
   <locales>
     <locale lang="ja_JP">
@@ -224,8 +228,46 @@
       <string name="You can't modify the base!" value="拠点は編集できません。"/>
       <string name="You can't enter the enemy team's spawn!" value="敵チームのスポーンに侵入することはできません。"/>
       <string name="You can't modify the void area!" value="指定範囲以外を編集することはできません。"/>
-      <string name="You can be the placement and destruction of smooth brick!" value="滑らかな砂岩とTNTの設置と破壊ができます。"/>
+      <string name="You can be the placement and destruction of quartz block and tnt!" value="ネザー水晶ブロックとTNTの設置と破壊ができます。"/>
       <string name="Capture the Control Point!" value="コントロールポイントの制圧!"/>
     </locale>
   </locales>
+
+  <include src="tutorial.xml" />
+	<tutorial>
+		<stage title="Control Point(CP)">
+			<message>
+				<line>This map is a `a`lControl point `r(CP) map.</line>
+				<line>To overwhelm the control point is the purpose.</line>
+			</message>
+			<message lang="ja_JP">
+				<line>このマップは`a`lControl point `r(CP)マップです。</line>
+				<line>コントロールポイントの制圧が目的です。</line>
+			</message>
+		</stage>
+		<stage title="Control point">
+			<title lang="ja_JP">コントロールポイント</title>
+			<message>
+				<line>This is Center Control Point.</line>
+			</message>
+			<message lang="ja_JP">
+				<line>ここはCenterコントロールポイントです。</line>
+			</message>
+			<teleport>
+				<point yaw="0" pitch="30">0.5,7,-9.5</point>
+			</teleport>
+		</stage>
+		<stage title="Control point">
+			<title lang="ja_JP">コントロールポイント</title>
+			<message>
+				<line>There are East, West, South, North Control points.</line>
+			</message>
+			<message lang="ja_JP">
+				<line>Center以外にNorth, East, West, South コントロールポイントがあります。</line>
+			</message>
+			<teleport>
+				<point yaw="180" pitch="60">0.5,28,-34.5</point>
+			</teleport>
+		</stage>
+	</tutorial>
 </map>
