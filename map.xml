@@ -4,12 +4,13 @@
 <!--
   2016/07/01 v1.0.0 - 初版
   2016/0702 v1.0.1 - チュートリアルの修正, Scriptの追加
+  2016/07/05 v1.0.2 - "Capture the Control Point!!"から"Capture the Control Point!"へ変更
  -->
 <map proto="1.3.5">
   <!-- マップ名 -->
   <name>End CP 2</name>
   <!-- バージョン -->
-  <version>1.0.1</version>
+  <version>1.0.2</version>
   <!-- 目標 -->
   <objective>Capture the Control Point!</objective>
 
