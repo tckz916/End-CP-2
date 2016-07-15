@@ -3,32 +3,34 @@
 <!-- 更新履歴 -->
 <!--
   2016/07/01 v1.0.0 - 初版
-  2016/0702 v1.0.1 - チュートリアルの修正, Scriptの追加
+  2016/07/02 v1.0.1 - チュートリアルの修正, Scriptの追加
   2016/07/05 v1.0.2 - "Capture the Control Point!!"から"Capture the Control Point!"へ変更
+  2016/07/15 v1.0.3 - map proto 1.3.3に変更, Map上のデザインの修正
  -->
-<map proto="1.3.5">
+<map proto="1.3.3">
   <!-- マップ名 -->
   <name>End CP 2</name>
   <!-- バージョン -->
-  <version>1.0.2</version>
+  <version>1.0.3</version>
   <!-- 目標 -->
   <objective>Capture the Control Point!</objective>
 
   <!-- 製作者 -->
   <authors>
     <!-- hayatarou_ -->
-    <author uuid="c65b1558-6410-4da7-9aef-cff42a2c1399"/>
+    <!-- <author uuid="c65b1558-6410-4da7-9aef-cff42a2c1399"/> -->
+    <author>hayatarou_</author>
   </authors>
 
   <!-- チーム -->
   <teams>
-    <team color="red" id="red" max="16">Red Team</team>
-    <team color="blue" id="blue" max="16">Blue Team</team>
+    <team color="red" max="16">Red Team</team>
+    <team color="blue" max="16">Blue Team</team>
   </teams>
 
   <!-- キット -->
   <kits>
-    <kit id="spawn">
+    <kit name="spawn">
       <item slot="0">stone_sword</item>
       <item amount="1" slot="1">fishing_rod</item>
       <item slot="2">diamond_pickaxe</item>
@@ -43,11 +45,11 @@
       <potion amplifier="100" duration="6">regeneration</potion>
     </kit>
 
-    <kit id="red" parents="spawn">
+    <kit name="red" parents="spawn">
       <helmet bind="true" color="FF5555">leather helmet</helmet>
     </kit>
 
-    <kit id="blue" parents="spawn">
+    <kit name="blue" parents="spawn">
       <helmet bind="true" color="5555FF">leather helmet</helmet>
     </kit>
   </kits>
@@ -88,15 +90,15 @@
 
   <!-- フィルター -->
   <filters>
-    <filter id="only_red">
+    <filter name="only_red">
       <team>red</team>
     </filter>
 
-    <filter id="only_blue">
+    <filter name="only_blue">
       <team>blue</team>
     </filter>
 
-    <filter id="allow_quartz_block" parents="deny-blocks">
+    <filter name="allow_quartz_block" parents="deny-blocks">
       <allow>
         <block>quartz_block</block>
         <block>tnt</block>
@@ -106,21 +108,17 @@
 
   <!-- リージョン -->
   <regions>
-    <everywhere id="everywhere"/>
-    <rectangle id="red_base" max="41,-41" min="26,-26"/>
-    <rectangle id="blue_base" max="-41,41" min="-26,26"/>
-    <cuboid id="center" max="9,0,-9" min="-9,5,9"/>
-    <cuboid id="north" max="2,16,-41" min="-2,23,-37"/>
-    <cuboid id="east" max="41,16,2" min="37,23,-2"/>
-    <cuboid id="west" max="-41,16,-2" min="-37,23,2"/>
-    <cuboid id="south" max="-2,16,41" min="2,23,37"/>
-    <rectangle id="void" max="-42,42" min="42,-42"/>
+    <everywhere name="everywhere"/>
+    <rectangle name="red_base" max="41,-41" min="26,-26"/>
+    <rectangle name="blue_base" max="-41,41" min="-26,26"/>
+    <cuboid name="center" max="9,0,-9" min="-9,5,9"/>
+    <cuboid name="north" max="2,16,-41" min="-2,23,-37"/>
+    <cuboid name="east" max="41,16,2" min="37,23,-2"/>
+    <cuboid name="west" max="-41,16,-2" min="-37,23,2"/>
+    <cuboid name="south" max="-2,16,41" min="2,23,37"/>
+    <rectangle name="void" max="-42,42" min="42,-42"/>
 
-    <negative id="void_negative">
-  		<region id="void"/>
-  	</negative>
-
-    <union id="cp">
+    <union name="cp">
       <region id="center"/>
       <region id="north"/>
       <region id="east"/>
@@ -128,38 +126,40 @@
       <region id="south"/>
     </union>
 
-    <union id="bases">
-      <region id="red_base"/>
-      <region id="blue_base"/>
+    <union name="bases">
+      <region name="red_base"/>
+      <region name="blue_base"/>
     </union>
 
     <apply block="deny-blocks" message="You can't modify the control point!">
-      <region id="cp"/>
+      <region name="cp"/>
     </apply>
 
     <apply block="deny-blocks" message="You can't modify the base!">
-      <region id="bases"/>
+      <region name="bases"/>
     </apply>
 
     <apply enter="only_red" message="You can't enter the enemy team's spawn!">
-      <region id="red_base"/>
+      <region name="red_base"/>
     </apply>
 
     <apply enter="only_blue" message="You can't enter the enemy team's spawn!">
-      <region id="blue_base"/>
-    </apply>
-
-    <apply block="allow_quartz_block" message="You can be the placement and destruction of quartz block and tnt!">
-      <region id="everywhere"/>
+      <region name="blue_base"/>
     </apply>
 
     <apply block="deny-blocks" message="You can't modify the void area!">
-      <region id="void_negative"/>
+      <negative>
+    		<region name="void"/>
+    	</negative>
+    </apply>
+
+    <apply block="allow_quartz_block" message="You can be the placement and destruction of quartz block and tnt!">
+      <region name="everywhere"/>
     </apply>
   </regions>
 
   <controlpoints score-limit="500">
-    <controlpoint capture-time="10" id="center" name="Center" score="10">
+    <controlpoint capture-time="10" name="Center" score="10">
       <capture>
         <cuboid max="9,0,-9" min="-9,5,9"/>
       </capture>
@@ -168,7 +168,7 @@
       </flag>
     </controlpoint>
 
-    <controlpoint capture-time="5" id="north" name="North" score="5">
+    <controlpoint capture-time="5" name="North" score="5">
       <capture>
         <cuboid max="2,16,-41" min="-2,23,-37"/>
       </capture>
@@ -177,7 +177,7 @@
       </flag>
     </controlpoint>
 
-    <controlpoint capture-time="5" id="east" name="East" score="5">
+    <controlpoint capture-time="5" name="East" score="5">
       <capture>
         <cuboid max="41,16,2" min="37,23,-2"/>
       </capture>
@@ -186,7 +186,7 @@
       </flag>
     </controlpoint>
 
-    <controlpoint capture-time="5" id="west" name="West" score="5">
+    <controlpoint capture-time="5" name="West" score="5">
       <capture>
         <cuboid max="-41,16,-2" min="-37,23,2"/>
       </capture>
@@ -195,7 +195,7 @@
       </flag>
     </controlpoint>
 
-    <controlpoint capture-time="5" id="south" name="South" score="5">
+    <controlpoint capture-time="5" name="South" score="5">
       <capture>
         <cuboid max="-2,16,41" min="2,23,37"/>
       </capture>
