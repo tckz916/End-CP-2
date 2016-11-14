@@ -108,7 +108,9 @@
 
   <!-- リージョン -->
   <regions>
-    <everywhere name="everywhere"/>
+    <negative name="everywhere">
+		  <rectangle max="0,0" min="0,0"/>
+	  </negative>
     <rectangle name="red_base" max="41,-41" min="26,-26"/>
     <rectangle name="blue_base" max="-41,41" min="-26,26"/>
     <cuboid name="center" max="9,0,-9" min="-9,5,9"/>
