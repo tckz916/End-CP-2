@@ -121,11 +121,11 @@
     <rectangle name="void" max="-42,42" min="42,-42"/>
 
     <union name="cp">
-      <region id="center"/>
-      <region id="north"/>
-      <region id="east"/>
-      <region id="west"/>
-      <region id="south"/>
+      <region name="center"/>
+      <region name="north"/>
+      <region name="east"/>
+      <region name="west"/>
+      <region name="south"/>
     </union>
 
     <union name="bases">
